@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My first Vue page</title>
+  <style>
+  </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <button v-on:click.once="createAlert">
+                Alert once
+            </button>    
+        </div>
+        
+        <div>
+            <button v-on:keydown="getKey">
+                {{ keyValue }}
+            </button>
+        </div>
+
+        <div>
+            <textarea v-on:keydown.ctrl.c="copyAlert" placeholder="test" rows="10" cols="10">
+                
+            </textarea>
+        </div>
+
+        <div v-bind:style="{backgroundColor:'hsl('+bgColor+' , 80% , 90%)'}" v-on:click.left="changeBgColor">
+            <p>Press right mouse button here.</p>
+        </div>
+    </div>
+
+  
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+          data(){
+            return {
+              keyValue : '' , 
+              copyMessage : "You have been copyed this text with ctrl + c" , 
+              bgColor : 0
+            }           
+          },
+          methods:{
+                createAlert(){
+                    alert("Vue JS");
+                },
+                getKey(evt){
+                    this.keyValue = evt.key;
+                    console.log(evt.key);
+                },
+                copyAlert(){
+                    alert(this.copyMessage);
+                },
+                changeBgColor(){
+                    this.bgColor += 50;
+                }
+            }
+         
+        });
+
+
+        app.mount("#app");
+    </script>
+</body>
+</html>
