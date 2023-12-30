@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My first Vue page</title>
+  <style>
+      .color-red{
+        color: red;
+      }
+
+      .addClassByVue{
+        height: 200px;
+        width: 200px;
+        background-color: rgb(180, 226, 218);
+        border: 1px dashed blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px auto;
+      }
+
+      .productImages{
+        max-width: 100px;
+        max-height: 100px;
+        width: 100px;
+        height: 100px;
+      }
+  </style>
+</head>
+<body>
+    <div id="app">
+        {{message}} <br />
+        <div  v-bind:class="vueClass">
+            {{'Random Number : ' + Math.ceil(Math.random() * 6)}}
+        </div>
+        
+        <div>
+            <p v-bind:style="{fontSize:size}">Size by v-bind-style</p>
+        </div>
+
+        <div v-bind:style="{ backgroundColor: 'hsl('+bgVal+',80%,80%)' }">
+          backgroundColor by v-bind-style
+        </div>
+
+
+        <div v-bind:style="{ backgroundColor: isImportant ? 'lightcoral' : 'lightgray' , color: colorVal}">
+          Conditional background color
+        </div>
+
+        <div v-bind:class="AddClassByVue">
+          Add Class By Vue
+        </div>
+
+        <div :style="{color:color}">
+          Shorthand 
+        </div>
+
+
+
+        <div v-if="isNew">
+          Conditional Rendering <span v-bind:style="{color:success}">True</span>
+        </div>
+        <div v-else="isNew">
+          Conditional Rendering <span v-bind:style="{color:danger}">False</span> 
+        </div>
+
+        <div v-if="text.includes('Vue')"> 
+            Text indclues <span v-bind:style="{color:success}">Vue</span> 
+        </div>
+        <div v-else-if="text.includes('Vue')"> 
+          the word 'Vue' is not found <span v-bind:style="{color:danger}">Vue</span> 
+      </div>
+
+
+
+      <div v-show="ShowDiv">
+        Div tag with v-show
+      </div>
+      
+      <div v-if="ShowDiv">
+        Div tag with v-if
+      </div>
+
+
+      <div>
+        used v-for
+          <li v-for="(x , index) in products">
+            {{index}}
+            <img v-bind:src="x.url" v-bind:class="productImages">
+            {{x.name}}
+          </li>
+      </div>
+
+
+
+      <div>
+        <p>
+          {{"Moose Count : " + count}}
+        </p>
+        <button v-on:click="count++">Increase Count</button>
+      </div>
+
+
+      <div>
+        <a :href="dynamicHref" :target="isBlank ? '_blank' : '_self'">Go Vue js</a>
+      </div>
+
+      <div>
+        <input type="text" v-on:input="inputCounter++" placeholder="start writing...">
+        <p>{{'input counter : ' +  inputCounter}}</p>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+          data(){
+            return {
+              vueClass : "color-red",
+              size: "50px",
+              bgVal: 180,
+              isImportant : false,
+              colorVal: "red",
+              AddClassByVue : 'addClassByVue',
+              color:'green',
+              success : "green" ,
+              danger:"red",
+              message : "Hello Vue" , 
+              isNew : false,
+              text:"Hello Vue js",
+              ShowDiv : true,
+              productImages : "productImages",
+              products : [
+                {id : 1 , name : "LG" , url : 'lg.png'},
+                {id : 2 , name : "SAMSUNG" , url : 'samsung.png'},
+                {id : 3 , name : "SONY" , url : 'sony.jpg'},
+                {id : 4 , name : "APPLE" , url : 'apple.png'}
+              ] ,
+              count : 0 ,
+              dynamicHref : 'https://vuejs.org/',
+              isBlank : true ,
+              inputCounter : 0
+            }
+           
+          }
+        });
+
+
+        app.mount("#app");
+    </script>
+</body>
+</html>
