@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My first Vue page</title>
+  <style>
+  </style>
+</head>
+<body>
+    <div id="app">
+        <form action="" v-on:submit.prevent="addPerson">
+            <p><input type="text" name="firsName" v-model="firstName" id="" placeholder="enter your first name ..."></p>
+            <p><input type="text" name="lastName" v-model="lastName" id="" placeholder="enter your last name ...."></p>
+            <button type="submit">Add Item</button>
+        </form>
+
+        <h3>People</h3>
+        <ul>
+            <li v-for="p in people"> {{p.firstName}} | {{p.lastName}}</li>
+        </ul>
+    </div>
+
+  
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+          data(){
+            return {
+              firstName : null,
+              lastName : null,
+              people : [
+                    { firstName : "a" , lastName : "b" }
+                ]
+            }           
+          },
+          methods:{
+                addPerson(){
+                    let person = {
+                        firstName : this.firstName , 
+                        lastName : this.lastName
+                    };
+                    this.people.push(person);
+
+                    this.firstName = null;
+                    this.lastName= null;
+                }
+            }
+         
+        });
+
+
+        app.mount("#app");
+    </script>
+</body>
+</html>
