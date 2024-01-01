@@ -1,47 +1,40 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+  export default {
+    data() {
+      return {
+        message :  'Hello World !'
+      }
+    }
+  }
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <h1>{{message}}</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>Food</h1>
+  <food-item food-name="Apples" food-description="Apples' description" 
+  v-bind:is-Favorite="true"
+  />
+  <food-item food-name="Bananas" food-description="Apples' Bananas" 
+  v-bind:is-Favorite="false"
+  />
+  <food-item food-name="Pears" food-description="Apples' Pears" 
+  v-bind:is-Favorite="false"
+  />
+
+
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+#app > div {
+  cursor: pointer;
+  border: dashed black 1px;
+    display: inline-block;
+    width: 120px;
+    margin: 10px;
+    padding: 10px;
+    background-color: lightgreen;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
