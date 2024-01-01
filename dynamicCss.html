@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping List 3</title>
+    <style>
+        #app {
+            border: dashed black 1px;
+            display: inline-block;
+            padding: 0 20px;
+        }
+
+        #app label,
+        #app li {
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        #app label:hover,
+        #app li:hover {
+            cursor: pointer;
+            background-color: lightgray;
+        }
+
+        div>img {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 3px;
+            border: solid white 4px;
+            border-radius: 5px;
+        }
+
+        img:hover {
+            cursor: pointer;
+        }
+
+        .selClass {
+            border: solid brown 4px;
+            background-color: lightpink;
+            max-width: 75px;
+            max-height: 75px;
+        }
+        .yelClass {
+            background-color: rgb(255, 255, 136);
+        }
+        #app > .text {
+            border: dashed black 1px;
+            width: 200px;
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="app">
+        <div v-for="(img, index) in imgList">
+            <img v-bind:src="img.url" v-on:click="select(index)" v-bind:class="{selClass: img.sel}">
+        </div>
+
+        <div class="text"
+            v-on:click="changeBg" v-bind:class="{yelClass : isYel}">
+            some text
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    imgList: [
+                        { name: "LG", url: "lg.png", sel: false },
+                        { name: "LG", url: "sony.jpg", sel: false }
+                    ] ,
+                    isYel : false
+                }
+            },
+            methods: {
+                select(number) {
+                    this.imgList[number].sel = !this.imgList[number].sel;
+                },
+                changeBg(){
+                    this.isYel = !this.isYel;
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

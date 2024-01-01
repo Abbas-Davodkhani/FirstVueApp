@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping List 3</title>
+  <style>
+    #app {
+      border: dashed black 1px;
+      display: inline-block;
+      padding: 0 20px;
+    }
+    #app label, #app li {
+      padding: 5px;
+      border-radius: 5px;
+    }
+    #app label:hover, #app li:hover {
+      cursor: pointer;
+      background-color: lightgray;
+    }
+    ul {
+      list-style-type: none;
+    }
+    li {
+      margin: 2px;
+      background-color: rgb(211, 254, 211);
+    }
+    .impClass {
+      background-color: rgb(255, 202, 202);
+    }
+    #ulFound li {
+      text-decoration: line-through;
+      background-color: rgb(230,230,230);
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <form>
+    <p>
+      What do you need? <br>
+      <label for="">
+        <input type="radio" name="ord" value="Dinner"  v-model="Dinner" v-on:click="showOrderDetail"/>
+        Dinner
+      </label><br />
+      <label for="">
+        <input type="radio" name="ord" value="Drink"   v-model="Drink"/>
+        Drink
+      </label><br />
+      <label for="">
+        <input type="radio" name="ord" value="Dessert" v-model="Dessert"/>
+        Dessert
+      </label>
+    <p>
+
+    <p>
+        <select v-show="showDetial" v-on:change="changeImg">
+            <option selected disabled>select item ... </option>
+            <option v-for="item in orderItems" 
+                v-bind:value="item.name" 
+                
+                v-bind:data-url="item.imgUrl">
+                {{item.name}}
+            </option>
+        </select>
+    </p>
+    <p>
+        <img v-bind:src="orderItemImgUrl" style="max-width: 50px; max-height: 50px;">
+    </p>
+    <button type="submit">ORDER</button>
+  </form>
+  <br>
+  <hr>
+
+  <div>
+    <p><strong>Shopping list:</strong></p>
+    
+  </div>
+</div>
+
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        orderItems : [] ,
+        showDetial : false , 
+        orderItemImgUrl : ''
+      }
+    },
+    methods: {
+        showOrderDetail()
+        {
+            this.showDetial = true ,
+            this.orderItems = [ 
+                {name : "First Item" , imgUrl : "sony.jpg" , type : "Dinner"} , 
+                {name : "Second Item" , imgUrl : "lg.png"}
+            ]
+        },
+        changeImg(e){
+            debugger
+            this.orderItemImgUrl = e.target.options[e.target.selectedIndex].getAttribute("data-url");
+        }
+    }
+  })
+ app.mount('#app')
+</script>
+
+</body>
+</html>

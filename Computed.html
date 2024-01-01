@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping List 3</title>
+    <style>
+        #app {
+            border: dashed black 1px;
+            display: inline-block;
+            padding: 0 20px;
+        }
+
+        #app label,
+        #app li {
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        #app label:hover,
+        #app li:hover {
+            cursor: pointer;
+            background-color: lightgray;
+        }
+   
+    </style>
+</head>
+
+<body>
+
+
+    <div id="app">
+        <div>
+            Is Important ? 
+            <input type="checkbox" v-model="chbVal" > {{isImportant}}
+        </div>
+      <div>
+        <input type="range" v-model="rng" />
+        <p><code>{{rng}}</code></p>
+      </div>
+    </div>
+    <div>
+        'template' Example
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template : `'<h1>{{message}}</h1>'`
+
+            ,
+            data() {
+                return {
+                    chbVal : false , 
+                    rng : 70 , 
+                    message : 'Hello Template in Vue.js'
+                }
+            },
+            watch : {
+                rng(val){
+                    if(val > 20 && val < 60){
+                        if(val < 40){
+                            this.rng = 20;
+                        }
+                        else{
+                            this.rng = 60;
+                        }
+                    }
+                }
+            },
+            computed : {
+                isImportant(){
+                    if(this.chbVal)
+                        return 'yes'
+                    else
+                        return 'no'
+                }
+            },
+            methods: {
+                
+            }
+        })
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>
